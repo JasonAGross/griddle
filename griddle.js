@@ -1,6 +1,10 @@
 /***********************************
 *
 *  Griddle
+<<<<<<< HEAD
+=======
+*  Copyright Healthx 2012, MIT License http://healthx.mit-license.org
+>>>>>>> init
 *
 ***********************************/
 
