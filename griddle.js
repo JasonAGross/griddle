@@ -218,6 +218,7 @@ var griddle = {
 								nxtRow = (movArr[i + 1] != null) ? movArr[i + 1].data("rowId") : -1,
 								nxtCol = (movArr[i + 1] != null) ? movArr[i + 1].data("startCol") : -1,
 								$data = movArr[i].data(),
+<<<<<<< HEAD
 								isContainer = false;
 						
 						
@@ -239,6 +240,23 @@ var griddle = {
 							$data.alpha = true;
 							if (itmCol !== 1) {
 									$data.prefix = itmCol - 1;
+=======
+								isContainer = false,
+								isContained = movArr[i].hasClass("contained");
+						if (!isContained) {
+							if (movArr[i].hasClass("contentregion")) {
+								$data.ciid = 0;
+								$data.ciid += "^" + movArr[i].attr("id");
+								isContainer = true;
+							}
+							if (nxtCol > -1 && nxtCol === itmCol && itmRow === nxtRow) {
+									for (var k = 0, kk = movArr.length; k < kk; k++) {
+											if (movArr[k].data("startCol") > itmCol) {
+													nxtCol = movArr[k].data("startCol");
+													break;
+											}
+									}
+>>>>>>> remove log statements
 							}
 							if (nxtRow === itmRow && nxtCol !== itmCol) {
 									$data.suffix = nxtCol - (itmSz + itmCol);
