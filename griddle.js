@@ -81,7 +81,7 @@ var griddle = {
 												})
 												.data("gridClass", parseInt(className, 10))
 												.width("100%");
-								$del.addClass("deletemeright").removeClass("deleteme");
+								// $del.addClass("deletemeright").removeClass("deleteme");
 								$itm.prepend($del);
 								$("<div class='" + gridClass + "' ></div>")
 										.append($itm)
@@ -93,7 +93,6 @@ var griddle = {
 								$("<div class='moveable' id='" + regid + "' >" + nm + "</div>")
 												.moveable({ ciLocation: location })
 												.data("locationId", loc)
-												.width("94%")
 										.appendTo($tgt.children(".sortableregion"));
 
 						} else if (loc == location) {
@@ -184,7 +183,7 @@ var griddle = {
 																.prependTo(griddleSelector + ".activeGrid");
 										griddle.validateLayout(false, "100");
 
-										var $del = $("<span class='deletemeright'>X</span>")
+										var $del = $("<span class='deleteme'>X</span>")
 																		.bind("click", function () {
 																				var url = "",
 																						data = { registryid: $(this).parent().data("regid") },
@@ -526,7 +525,7 @@ $.widget("hx.moveable", {
                         childsH = 0,
                         rowId = -1,
                         locId = self.options.ciLocation;
-                    cln.css("left", "0").css("top", "0").css("position", "relative").width("94%").addClass("contained");
+                    cln.css("left", "0").css("top", "0").css("position", "relative").addClass("contained");
                     locId = $tgt.attr("id").split("ContentItemContainer")[1];
 
                     cln.data("locationId", locId);
