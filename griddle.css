@@ -580,7 +580,7 @@ html body * dd.clear
 	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
-.activeGrid .moveable:before {
+.activeGrid .moveable:before, .activeGrid .contentregion:before {
 	position: absolute;
 	font-family: "Times New Roman", Times, serif;
 	content: '==';
@@ -634,27 +634,56 @@ html body * dd.clear
 }
 
 .activeGrid .contentregion {
-    height: 55px;
+    height: auto !important;
+	min-height: 55px;
     width: 48%;
     /*margin-left: 1%; */
     margin-right: 1%;
     box-sizing: border-box;
     position: relative;
     background: #abbfeb;
+	overflow: hidden;
+	text-align: center;
 
 	-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
 	-moz-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
 	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
+.activeGrid .contentregion:before {
+	border-bottom: 1px solid #809cd9;
+	
+	background-color: #abbfeb;
+	background-image: -moz-linear-gradient(top, #c6d4f2, #8ca7e3);
+	background-image: -ms-linear-gradient(top, #c6d4f2, #8ca7e3);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#c6d4f2), to(#8ca7e3));
+	background-image: -webkit-linear-gradient(top, #c6d4f2, #8ca7e3);
+	background-image: -o-linear-gradient(top, #c6d4f2, #8ca7e3);
+	background-image: linear-gradient(top, #c6d4f2, #8ca7e3);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6d4f2', endColorstr='#8ca7e3', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
 .contentregion .moveable {
-    margin-left: auto 0;
-    margin-right: auto 0;
-    margin-bottom: 1%;
+	width: auto;
+    margin: 5px 10px;
 
 	-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
 	-moz-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
 	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.contentregion .moveable:first-child {
+	margin-top: 20px;
+}
+
+.contentregion .sortableinfo {
+	display: block;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #173371;
+	line-height: 55px;
+	text-align: center;
 }
 
 .sizeRef
@@ -778,8 +807,7 @@ html body * dd.clear
 
 .sortableregion {
     width: 100%;
-    height:100%;
-	padding-left: 5px;
+    height: 100%;
 }
 
 .deleteme {
