@@ -119,10 +119,16 @@ var griddle = {
 				$(griddleSelector + ".contentregion").each(function () {
 						var $tgt = $(this), childs, childsH = 0, rowId, rowH;
 						childs = $tgt.children().children(".moveable");
-						childs.each(function () {
-								childsH += $(this).height() + ($(this).height() * 0.01);
-						});
-						childsH += 15;
+
+						childsH += 55;
+						for (var i = 0; i < childs.length; i++) {
+							if (i === 0) {
+								childsH += 25;
+							} else {
+								childsH += 60;
+							}
+						}
+
 						$tgt.css("height", childsH + "px");
 						rowId = griddle.getRowId($tgt.offset().top, location);
 						rowH = $(".r" + rowId).height();
@@ -535,11 +541,16 @@ $.widget("hx.moveable", {
                     childs = $tgt.children().children(".moveable");
                     cln.data("sortorder", childs.length);
                     $tgt.children(".sortableinfo").remove();
-
-                    childs.each(function () {
-                        childsH += $(this).height() + ($(this).height() * 0.01);
-                    });
-                    childsH += 15;
+					
+					childsH += 55;
+					for (var i = 0; i < childs.length; i++) {
+						if (i === 0) {
+							childsH += 25;
+						} else {
+							childsH += 60;
+						}
+					}
+						
                     $tgt.css("height", childsH + "px");
                     rowId = griddle.getRowId($tgt.offset().top, locId);
                     $(".r" + rowId).css("height", childsH + "px");
