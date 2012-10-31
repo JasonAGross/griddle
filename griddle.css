@@ -858,6 +858,6 @@ html body * dd.clear
     border: 3px solid #4ECDC4; 
 }
 
-pre.output {
+pre#output {
 	margin: 1%;
 }
