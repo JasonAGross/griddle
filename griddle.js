@@ -502,7 +502,7 @@ $.widget("hx.moveable", {
             connectToSortable: ".moveable .contentregion",
             snap: ".grid_1, .grid_12 .contentregion",
             snapMode: "inner",
-            snapTolerance: 50,
+            snapTolerance: w * 0.19,
             grid: [1, 55],
             stop: function (e, u) {
                 griddle.setMessage("clear", "", self.options.ciLocation);

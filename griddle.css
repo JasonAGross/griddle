@@ -490,6 +490,7 @@ html body * dd.clear
 }
 .griddle {
 	position: relative;
+    max-width: 1200px;
 }
 
 .fieldGroup {
