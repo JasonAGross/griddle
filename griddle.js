@@ -780,6 +780,36 @@ var griddle = {
 						$(griddleSelector + ".passGrid").append("<div class='grid_12 r" + griddleRows + "'></div>");
 						return false;
 				});
+
+                $(griddleSelector + '.addItem').click(function () {
+                    var $itm = $("<div class='moveable' >" + "Item" + "</div>")
+                    .moveable({ ciLocation: location })
+                    .data("ciid", "0")
+                    .appendTo(".activeGrid");
+
+                    var $del = $("<span class='deleteme'>X</span>")
+                        .bind("click", function () {
+                            var url = "",
+                            data = { registryid: $(this).parent().data("regid") },
+                            conf = window.confirm("Are you sure you wish to delete this item?");
+                        if (conf) {
+                            if ($(this).parent().data("regid")) {
+
+                            } else {
+                                griddle.setMessage("info", "Item Removed", location);
+                                $(this).parent().remove();
+                                $(griddleSelector + ".output").text(griddle.container.html());
+                                griddle.validateLayout(false, location);
+                            }
+                        }
+                        return false;
+                        });
+                    $itm.prepend($del);
+
+                    griddleRows++;
+                    $(".passGrid").append("<div class='grid_12 r" + griddleRows + "'></div>");
+                    griddle.validateLayout(false, location);
+                });
 		},
 		getRowId: function (t, location) {
 				var griddleSelector = '#griddleContainer' + location + ' ';
@@ -909,6 +939,7 @@ var griddle = {
 											} else {
 													$data.suffix = 0; //reset
 											}
+
 									} else {
 											currRow = itmRow;
 											contRow = isContainer ? itmRow : contRow;
@@ -1194,37 +1225,6 @@ $.widget("hx.moveable", {
     }
 });
 $.widget.bridge("moveable", $.hx.moveable);
-
-        $(document).on("click", ".addItem", function () {
-           
-            var $itm = $("<div class='moveable' >" + "Item" + "</div>")
-                .moveable({ ciLocation: 0 })
-                .data("ciid", "0")
-                .appendTo(".activeGrid");
-
-            var $del = $("<span class='deleteme'>X</span>")
-                                .bind("click", function () {
-                                    var url = "",
-                                        data = { registryid: $(this).parent().data("regid") },
-                                        conf = window.confirm("Are you sure you wish to delete this item?");
-                                    if (conf) {
-                                        if ($(this).parent().data("regid")) {
-                                           
-                                        } else {
-                                            $(this).parent().remove();
-                                            griddle.setMessage("info", "Item Removed", self.options.ciLocation);
-                                        }
-                                    }
-                                    return false;
-                                });
-            $itm.prepend($del);
-
-            griddleRows++;
-            $(".passGrid").append("<div class='grid_12 r" + griddleRows + "'></div>");
-            griddle.validateLayout(false, "100");
-        });
-
-
 
     $(document).ready(function () {
         if (top !== self) {
