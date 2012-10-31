@@ -30,7 +30,7 @@ var griddle = {
 
 				});
 				//TODO: unify the markup updates
-				$("#output").text(griddle.container.html());
+				$(griddleSelector + ".output").text(griddle.container.html());
 
 				var gridColumns = 1;
 				for (var i = 0; i < data.length; i++) {
@@ -67,6 +67,7 @@ var griddle = {
 																	 
 																$(this).parent().remove();
 																griddle.setMessage("info", "Content Item Removed", location);
+                                                                griddle.validateLayout(false , location);
 														}
 														return false;
 												});
@@ -187,7 +188,7 @@ var griddle = {
 																})
 																.css("margin-left", "1%")
 																.prependTo(griddleSelector + ".activeGrid");
-										griddle.validateLayout(false, "100");
+										griddle.validateLayout(false, location);
 
 										var $del = $("<span class='deleteme'>X</span>")
 																		.bind("click", function () {
@@ -211,6 +212,7 @@ var griddle = {
 																						} else {
 																								$(this).parent().remove();
 																								griddle.setMessage("info", "Content Item Removed", location);
+                                                                                                griddle.validateLayout(false , location);
 																						}
 
 																				}
@@ -224,6 +226,36 @@ var griddle = {
 						$(griddleSelector + ".passGrid").append("<div class='grid_12 r" + griddleRows + "'></div>");
 						return false;
 				});
+
+                $(griddleSelector + '.addItem').click(function () {
+                    var $itm = $("<div class='moveable' >" + "Item" + "</div>")
+                    .moveable({ ciLocation: location })
+                    .data("ciid", "0")
+                    .appendTo(".activeGrid");
+
+                    var $del = $("<span class='deleteme'>X</span>")
+                        .bind("click", function () {
+                            var url = "",
+                            data = { registryid: $(this).parent().data("regid") },
+                            conf = window.confirm("Are you sure you wish to delete this item?");
+                        if (conf) {
+                            if ($(this).parent().data("regid")) {
+
+                            } else {
+                                griddle.setMessage("info", "Item Removed", location);
+                                $(this).parent().remove();
+                                $(griddleSelector + ".output").text(griddle.container.html());
+                                griddle.validateLayout(false, location);
+                            }
+                        }
+                        return false;
+                        });
+                    $itm.prepend($del);
+
+                    griddleRows++;
+                    $(".passGrid").append("<div class='grid_12 r" + griddleRows + "'></div>");
+                    griddle.validateLayout(false, location);
+                });
 		},
 		getRowId: function (t, location) {
 				var griddleSelector = '#griddleContainer' + location + ' ';
@@ -427,7 +459,7 @@ var griddle = {
 				}
 				griddle.container.children(".container_12").empty();
 				griddle.container.children(".container_12").append(outputDivs);
-				$("#output").text(griddle.container.html());
+				$(griddleSelector + ".output").text(griddle.container.html());
 				prettyPrint();
 		}
 };
@@ -493,11 +525,12 @@ $.widget("hx.moveable", {
         ciLocation: 0
     },
     _create: function () {
+        var griddleSelector = '#griddleContainer' + this.options.ciLocation + ' ';
         var self = this,
         w = $(".sizeRef").width();
         $el = this.element;
         $el
-        .data("gridClass", self.options.isDroppable ? 6 : 3)
+        .data("gridClass", this.options.isDroppable ? 6 : 3)
         .draggable({
             connectToSortable: ".moveable .contentregion",
             snap: ".grid_1, .grid_12 .contentregion",
@@ -505,17 +538,18 @@ $.widget("hx.moveable", {
             snapTolerance: w * 0.19,
             grid: [1, 55],
             stop: function (e, u) {
-                griddle.setMessage("clear", "", self.options.ciLocation);
-                griddle.validateLayout(false, "100");
+                griddle.setMessage("clear", "", $el.moveable("option", "ciLocation"));
+                griddle.validateLayout(false, $el.moveable("option", "ciLocation"));
             }
         })
         .resizable({
+            ciLocation: this.options.ciLocation,
             grid: [1, 55],
             helper: 'ui-state-highlight',
-            handles: self.options.handles
+            handles: this.options.handles
         });
 
-        if (self.options.isDroppable) {
+        if (this.options.isDroppable) {
             $el.children(".sortableregion").sortable({
                 placeholder: 'ui-sortable-placeholder',
                 forcePlaceholderSize: true
@@ -530,7 +564,7 @@ $.widget("hx.moveable", {
                         childs,
                         childsH = 0,
                         rowId = -1,
-                        locId = self.options.ciLocation;
+                        locId = this.options.ciLocation;
                     cln.css("left", "0").css("top", "0").css("position", "relative").addClass("contained");
                     locId = $tgt.attr("id").split("ContentItemContainer")[1];
 
@@ -555,7 +589,7 @@ $.widget("hx.moveable", {
                     rowId = griddle.getRowId($tgt.offset().top, locId);
                     $(".r" + rowId).css("height", childsH + "px");
 
-                    griddle.validateLayout(false, "100");
+                    griddle.validateLayout(false, this.options.ciLocation);
 
                 }
             });
@@ -620,7 +654,7 @@ $.widget("hx.moveable", {
                 self.size.height = os.height + oy;
                 //set children of content regions to the correct width!
                 $(this).children(".sortableregion").children(".moveable").width("96%");
-                griddle.validateLayout(false, "100");
+                griddle.validateLayout(false, self.options.ciLocation);
 
             }
 
@@ -635,44 +669,12 @@ $.widget("hx.moveable", {
 });
 $.widget.bridge("moveable", $.hx.moveable);
 
-        $(document).on("click", ".addItem", function () {
-           
-            var $itm = $("<div class='moveable' >" + "Item" + "</div>")
-                .moveable({ ciLocation: 0 })
-                .data("ciid", "0")
-                .appendTo(".activeGrid");
+$(document).ready(function () {
+    if (top !== self) {
+        $(".griddle").css("min-height", "500px");
+    }
 
-            var $del = $("<span class='deleteme'>X</span>")
-                                .bind("click", function () {
-                                    var url = "",
-                                        data = { registryid: $(this).parent().data("regid") },
-                                        conf = window.confirm("Are you sure you wish to delete this item?");
-                                    if (conf) {
-                                        if ($(this).parent().data("regid")) {
-                                           
-                                        } else {
-                                            $(this).parent().remove();
-                                            griddle.setMessage("info", "Item Removed", self.options.ciLocation);
-                                        }
-                                    }
-                                    return false;
-                                });
-            $itm.prepend($del);
-
-            griddleRows++;
-            $(".passGrid").append("<div class='grid_12 r" + griddleRows + "'></div>");
-            griddle.validateLayout(false, "100");
-        });
-
-
-
-    $(document).ready(function () {
-        if (top !== self) {
-            $(".griddle").css("min-height", "500px");
-        }
-
-        var url = "";
-        griddle.init(0,"100");
-    });
-
+    var url = "";
+    griddle.init(0,"100");
+});
 
