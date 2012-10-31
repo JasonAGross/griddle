@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***********************************
 *
 *  Griddle
@@ -551,6 +552,8 @@ $.widget.bridge("moveable", $.hx.moveable);
 
 
 =======
+=======
+>>>>>>> Fix drag snapping
 /***********************************
 *
 *  Griddle
@@ -1055,7 +1058,11 @@ $.widget("hx.moveable", {
             connectToSortable: ".moveable .contentregion",
             snap: ".grid_1, .grid_12 .contentregion",
             snapMode: "inner",
+<<<<<<< HEAD
             snapTolerance: 50,
+=======
+            snapTolerance: w * 0.19,
+>>>>>>> Fix drag snapping
             grid: [1, 55],
             stop: function (e, u) {
                 griddle.setMessage("clear", "", self.options.ciLocation);
@@ -1229,4 +1236,7 @@ $.widget.bridge("moveable", $.hx.moveable);
     });
 
 
+<<<<<<< HEAD
 >>>>>>> #4 content region heights
+=======
+>>>>>>> Fix drag snapping
