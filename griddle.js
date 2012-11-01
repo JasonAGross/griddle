@@ -1,6 +1,9 @@
 /***********************************
 *
 *  Griddle
+*  
+*  copyright 2012 Healthx, Inc.
+*  MIT Licensed http://healthx.mit-license.org
 *
 ***********************************/
 
