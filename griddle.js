@@ -557,6 +557,9 @@ $.widget.bridge("moveable", $.hx.moveable);
 /***********************************
 *
 *  Griddle
+*  
+*  copyright 2012 Healthx, Inc.
+*  MIT Licensed http://healthx.mit-license.org
 *
 ***********************************/
 
