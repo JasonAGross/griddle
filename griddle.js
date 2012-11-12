@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 /***********************************
 *
 *  Griddle
-<<<<<<< HEAD
-=======
 *  Copyright Healthx 2012, MIT License http://healthx.mit-license.org
->>>>>>> init
 *
 ***********************************/
 
@@ -220,7 +216,6 @@ var griddle = {
 								nxtRow = (movArr[i + 1] != null) ? movArr[i + 1].data("rowId") : -1,
 								nxtCol = (movArr[i + 1] != null) ? movArr[i + 1].data("startCol") : -1,
 								$data = movArr[i].data(),
-<<<<<<< HEAD
 								isContainer = false;
 						
 						
@@ -242,7 +237,7 @@ var griddle = {
 							$data.alpha = true;
 							if (itmCol !== 1) {
 									$data.prefix = itmCol - 1;
-=======
+
 								isContainer = false,
 								isContained = movArr[i].hasClass("contained");
 						if (!isContained) {
@@ -258,7 +253,7 @@ var griddle = {
 													break;
 											}
 									}
->>>>>>> remove log statements
+
 							}
 							if (nxtRow === itmRow && nxtCol !== itmCol) {
 									$data.suffix = nxtCol - (itmSz + itmCol);
@@ -551,9 +546,6 @@ $.widget.bridge("moveable", $.hx.moveable);
     });
 
 
-=======
-=======
->>>>>>> Fix drag snapping
 /***********************************
 *
 *  Griddle
@@ -1092,11 +1084,7 @@ $.widget("hx.moveable", {
             connectToSortable: ".moveable .contentregion",
             snap: ".grid_1, .grid_12 .contentregion",
             snapMode: "inner",
-<<<<<<< HEAD
-            snapTolerance: 50,
-=======
             snapTolerance: w * 0.19,
->>>>>>> Fix drag snapping
             grid: [1, 55],
             stop: function (e, u) {
                 griddle.setMessage("clear", "", self.options.ciLocation);
@@ -1239,7 +1227,3 @@ $.widget.bridge("moveable", $.hx.moveable);
     });
 
 
-<<<<<<< HEAD
->>>>>>> #4 content region heights
-=======
->>>>>>> Fix drag snapping
