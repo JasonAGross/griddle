@@ -677,5 +677,3 @@ $.widget.bridge("moveable", $.hx.moveable);
         var url = "";
         griddle.init(0,"100");
     });
-
-

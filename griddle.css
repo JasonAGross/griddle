@@ -449,48 +449,26 @@ h1, h2, h3 {
 	padding-right: 93.75%;
 }
 
-/* =Clear Floated Elements
---------------------------------------------------------------------------------*/
+/* End Grid CSS, begin tool styles */
 
-/* http://sonspring.com/journal/clearing-floats */
-
-html body * span.clear,
-html body * div.clear,
-html body * li.clear,
-html body * dd.clear
-{
-	background: none;
-	border: 0;
-	clear: both;
-	display: block;
-	float: none;
-	font-size: 0;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	visibility: hidden;
-	width: 0;
-	height: 0;
+.griddleContainer {
+	max-width: 1200px;
+	margin: auto;
 }
-
-.clearfix:before, .clearfix:after { content: ""; display: table; }
-.clearfix:after { clear: both; }
-.clearfix { zoom: 1; }
 
 .ui-icon-triangle-1-s {
     background-position: -32px -16px;
 }
-.ui-widget
-{
+
+.ui-widget {
     max-height: 250px;
     overflow-y: auto; /* prevent horizontal scrollbar */
     overflow-x: hidden; /* add padding to account for vertical scrollbar */
     padding-right: 20px;
 }
+
 .griddle {
 	position: relative;
-    max-width: 1200px;
 }
 
 .fieldGroup {
@@ -687,12 +665,12 @@ html body * dd.clear
 	text-align: center;
 }
 
-.sizeRef
-{
+.sizeRef {
     width: 23%;
     box-sizing: border-box;
     display: none;
 }
+
 .ui-autocomplete {
     cursor: default;
     position: absolute;
@@ -861,3 +839,7 @@ html body * dd.clear
 pre#output {
 	margin: 1%;
 }
+
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
