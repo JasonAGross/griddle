@@ -113,11 +113,7 @@ var griddle = {
 				var rows = Math.floor(gridColumns / 12) + (gridColumns % 12 > 0 ? 1 : 0);
 				rows = isNaN(rows) ? 1 : rows;
 				griddleRows = rows;
-				for (var i = 0; i < rows; i++) {
-						var rw = i === rows ? "<div class='grid_12 r" + (i + 1) + "'><span class='addme'>+</span></div>" : "<div class='grid_12 r" + (i + 1) + "'></div>";
-						//$(griddleSelector + ".passGrid").append(rw);
-				}
-
+				
 				//Update the height of rows dependent on their children
 				$(griddleSelector + ".contentregion").each(function () {
 						var $tgt = $(this), childs, childsH = 0, rowId, rowH;
@@ -189,7 +185,7 @@ var griddle = {
 																		ciLocation: location
 																})
 																.css("margin-left", "1%")
-																.prependTo(griddleSelector + ".activeGrid");
+																.appendTo(griddleSelector + ".activeGrid");
 										griddle.validateLayout(false, "100");
 
 										var $del = $("<span class='deleteme'>X</span>")
