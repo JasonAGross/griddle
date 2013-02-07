@@ -178,7 +178,7 @@ var griddle = {
 										});
 										
 										cnt = mx + 100;
-										$itm = $("<div class='contentregion region" + cnt + "' id='ContentItemContainer" + cnt + "' ><span class='sortableinfo'>Drag any Item onto this region</span><div class='sortableregion'></div></div>")
+										$itm = $("<div class='contentregion region" + cnt + "' id='ContentItemContainer" + cnt + "' ><div class='regionControls'><span class='itemEdit button'><img src='http://www.jasonagross.com/images/editIcon.png' /> View/Edit</span><span class='itemCount'> Items</span></div><div class='sortableregion'></div></div>")
 																.moveable({
 																		handles: "e, s, se",
 																		isDroppable: true,
@@ -665,11 +665,29 @@ $.widget("hx.moveable", {
 });
 $.widget.bridge("moveable", $.hx.moveable);
 
-    $(document).ready(function () {
-        if (top !== self) {
-            $(".griddle").css("min-height", "500px");
-        }
+$(document).ready(function () {
+	if (top !== self) {
+		$(".griddle").css("min-height", "500px");
+	}
 
-        var url = "";
-        griddle.init(0,"100");
-    });
+	var url = "";
+	griddle.init(0,"100");
+});
+
+// Start JS that Jason did (aka: JS that needs to be fixed)
+	
+$(document).on("click", ".itemEdit", function() {
+	console.log("click");
+	var ciCount = $(this).closest(".contentregion").find(".sortableregion > div").size();
+	if ( $(this).closest(".contentregion").height() <= 55 ){
+		console.log("expand");
+		$(this).closest(".contentregion").animate({
+			height: ciCount * 60 + 55 + "px"
+		}, 1000 );
+	} else {
+		console.log("collapse");
+		$(this).closest(".contentregion").animate({
+			height: "55px"
+		}, 1000 );
+	}
+});
