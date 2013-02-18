@@ -78,13 +78,13 @@ var griddle = {
 								var region = "region" + nm.split("ContentItemContainer")[1];
 								$itm = $("<div class='contentregion " + region + "' id='" + nm + "' ><div class='sortableregion'></div></div>")
 												.moveable({
-														handles: "e, s, se",
+														handles: "e",
 														isDroppable: true,
 														ciLocation: location
 												})
 												.data("gridClass", parseInt(className, 10))
 												.width("100%");
-								// $del.addClass("deletemeright").removeClass("deleteme");
+								
 								$itm.prepend($del);
 								$("<div class='" + gridClass + "' ></div>")
 										.append($itm)
@@ -180,7 +180,7 @@ var griddle = {
 										cnt = mx + 100;
 										$itm = $("<div class='contentregion region" + cnt + "' id='ContentItemContainer" + cnt + "' ><div class='regionControls'><span class='itemEdit button'><img src='http://www.jasonagross.com/images/editIcon.png' /> View/Edit</span><span class='itemCount'> Items</span></div><div class='sortableregion'></div></div>")
 																.moveable({
-																		handles: "e, s, se",
+																		handles: "e",
 																		isDroppable: true,
 																		ciLocation: location
 																})
@@ -571,19 +571,6 @@ $.widget("hx.moveable", {
                     childs = $tgt.children().children(".moveable");
                     cln.data("sortorder", childs.length);
                     $tgt.children(".sortableinfo").remove();
-					
-					childsH += 55;
-					for (var i = 0; i < childs.length; i++) {
-						if (i === 0) {
-							childsH += 25;
-						} else {
-							childsH += 60;
-						}
-					}
-						
-                    $tgt.css("height", childsH + "px");
-                    rowId = griddle.getRowId($tgt.offset().top, locId);
-                    $(".r" + rowId).css("height", childsH + "px");
 
                     griddle.validateLayout(false, "100");
 
