@@ -178,7 +178,7 @@ var griddle = {
 										});
 										
 										cnt = mx + 100;
-										$itm = $("<div class='contentregion region" + cnt + "' id='ContentItemContainer" + cnt + "' ><div class='regionControls'><span class='itemEdit button'><img src='http://www.jasonagross.com/images/editIcon.png' /> View/Edit</span><span class='itemCount'> Items</span></div><div class='sortableregion'></div></div>")
+										$itm = $("<div class='contentregion region" + cnt + "' id='ContentItemContainer" + cnt + "' ><div class='regionControls'><span class='itemEdit button'><img src='http://www.jasonagross.com/images/editIcon.png' /> View/Edit</span><span class='itemCount'>No Items</span></div><div class='sortableregion'></div></div>")
 																.moveable({
 																		handles: "e",
 																		isDroppable: true,
@@ -571,6 +571,11 @@ $.widget("hx.moveable", {
                     childs = $tgt.children().children(".moveable");
                     cln.data("sortorder", childs.length);
                     $tgt.children(".sortableinfo").remove();
+                    if (childs.length === 1) {
+						$tgt.find(".itemCount").html("1 Item");
+                    } else {
+						$tgt.find(".itemCount").html(childs.length + " Items");
+                    }
 
                     griddle.validateLayout(false, "100");
 
