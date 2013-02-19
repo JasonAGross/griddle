@@ -669,17 +669,14 @@ $(document).ready(function () {
 // Start JS that Jason did (aka: JS that needs to be fixed)
 	
 $(document).on("click", ".itemEdit", function() {
-	console.log("click");
 	var ciCount = $(this).closest(".contentregion").find(".sortableregion > div").size();
 	if ( $(this).closest(".contentregion").height() <= 55 ){
-		console.log("expand");
 		$(this).closest(".contentregion").animate({
 			height: ciCount * 60 + 55 + "px"
-		}, 1000 );
+		}, 500 );
 	} else {
-		console.log("collapse");
 		$(this).closest(".contentregion").animate({
 			height: "55px"
-		}, 1000 );
+		}, 500 );
 	}
 });
